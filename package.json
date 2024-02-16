@@ -1,0 +1,11 @@
+{
+  "name": "roman-converter",
+  "module": "dist/main.js",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

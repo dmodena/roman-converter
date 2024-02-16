@@ -2,6 +2,9 @@
   "name": "roman-converter",
   "module": "dist/main.js",
   "type": "module",
+  "scripts": {
+    "build": "bun build.js"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

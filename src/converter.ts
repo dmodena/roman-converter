@@ -28,35 +28,35 @@ export class Converter {
     return output.join('');
   }
 
-  public static toDecimal(value: string): number {
-    if (value.length === 1)
-      return this.getGlyphValue(value);
-
-    let result = 0;
-    let pairProcessed = false;
-
-    for (let i = 0, j = 1; j < value.length; i++, j++) {
-      if (pairProcessed) {
-        pairProcessed = false;
-        continue;
+  public static toDecimal(value: string, sum: number = 0, unprocessed: string = ''): number {
+    if (value.length === 1) {
+      if (unprocessed) {
+        value = unprocessed + value;
       }
 
-      let iValue = this.getGlyphValue(value[i]);
-      let jValue = this.getGlyphValue(value[j]);
-
-      if (iValue >= jValue)
-        result += iValue;
-      else {
-        let pair = value.substring(i, i + 2);
-        result += this.getGlyphValue(pair);
-        pairProcessed = true;
-      }
+      sum += this.getGlyphValue(value);
+      return sum;
     }
 
-    if (!pairProcessed)
-      result += this.getGlyphValue(value.at(-1) ?? '');
+    if (unprocessed) {
+      let glyph = unprocessed + value[0];
+      sum += this.getGlyphValue(glyph);
+      value = value.substring(1);
+      return this.toDecimal(value, sum);
+    }
 
-    return result;
+    let curr = this.getGlyphValue(value[0]);
+    let next = this.getGlyphValue(value[1]);
+
+    if (curr >= next) {
+      sum += curr;
+      value = value.substring(1);
+      return this.toDecimal(value, sum);
+    }
+
+    let toBeProcessed = value[0];
+    value = value.substring(1);
+    return this.toDecimal(value, sum, toBeProcessed);
   }
 
   private static getGlyphValue(glyph: string): number {

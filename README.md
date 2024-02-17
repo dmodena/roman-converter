@@ -113,7 +113,7 @@ await Bun.build({
 
 2. Add a build script inside `package.json`:
 
-```JSON
+```JavaScript
 // above "dependencies"
 "scripts": {
   "build": "bun build.js"

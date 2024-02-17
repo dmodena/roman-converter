@@ -31,11 +31,11 @@ describe('Roman converter', () => {
     [3999, 'MMMCMXCIX'],
   ];
 
-  test.each(cases)("Convert to Roman %p = %p", (decimal, roman) => {
+  test.each(cases)('Convert to Roman %p = %p', (decimal, roman) => {
     expect(Converter.toRoman(decimal)).toEqual(roman);
   });
 
-  test.each(cases)("Convert to Decimal %p = %p", (decimal, roman) => {
+  test.each(cases)('Convert to Decimal %p = %p', (decimal, roman) => {
     expect(Converter.toDecimal(roman)).toEqual(decimal);
   });
 });

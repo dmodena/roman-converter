@@ -15,17 +15,19 @@ export class Converter {
     [1,     'I'],
   ];
 
-  public static toRoman(value: number): string {
-    const output: string[] = [];
+  public static toRoman(value: number, result: string[] = []): string {
+    if (value < 1)
+      return result.join('');
 
-    this.conversionTable.forEach(([d, r]) => {
-      while (value >= d) {
-        value -= d;
-        output.push(r);
-      }
-    });
+    let entry = this.conversionTable.find(([d,]) => value >= d);
 
-    return output.join('');
+    if (!entry)
+      return result.join('');
+
+    value -= entry[0];
+    result.push(entry[1]);
+
+    return this.toRoman(value, result);
   }
 
   public static toDecimal(value: string, sum: number = 0, unprocessed: string = ''): number {

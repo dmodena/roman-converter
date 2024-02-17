@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { Converter } from '../dist/converter';
+import { Converter } from '../src/converter';
 
 describe('Roman converter', () => {
   const cases: [number, string][] = [

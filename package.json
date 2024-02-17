@@ -1,6 +1,6 @@
 {
   "name": "roman-converter",
-  "module": "dist/main.js",
+  "module": "dist/converter.min.js",
   "type": "module",
   "scripts": {
     "build": "bun build.js"

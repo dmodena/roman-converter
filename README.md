@@ -38,6 +38,7 @@ Depends on [Bun](https://bun.sh). Created with Bun v1.0.26.
 ``` 
 
 2. Import the module in your main script:
+
 ```JavaScript
 // script.js
 import { Converter } from './lib/converter.min.js';
@@ -45,6 +46,7 @@ import { Converter } from './lib/converter.min.js';
 ```
 
 3. Use it (:
+
 ```JavaScript
 // script.js
 ...
@@ -54,16 +56,50 @@ value = Converter.toRoman(42); // XLII
 value = Converter.toDecimal('MMXXIV'); // 2024
 ```
 
+#### Full example
+
+```JavaScript
+import { Converter } from './lib/converter.min.js';
+
+const main = () => {
+    const input = document.querySelector('#roman');
+    const output = document.querySelector('#decimal');
+    const error = document.querySelector('#error');
+
+    input.oninput = () => {
+        if (input.value.length === 0) {
+            output.innerHTML = '';
+            error.innerHTML = '';
+            return;
+        }
+
+        let value = 0;
+        try {
+            value = Converter.toDecimal(input.value.toUpperCase());
+            output.innerHTML = value;
+            error.innerHTML = '';
+        } catch (err) {
+            error.innerHTML = `Error: ${err}`;
+        }
+    };
+}
+
+document.addEventListener('DOMContentLoaded', (e) => main());
+```
+
 ## Create your own
 
 To create a lib like this, follow these steps:
+
 1. Install [Bun](https://bun.sh/docs/installation)
 2. Create a directory for your package
 3. Inside the directory, create the package with bun: `bun init`
 4. All good! You can compile with `bun build <filename>` and run tests with `bun test`
 
-If you want to customize the build
+If you want to customize the build:
+
 1. Create a build file:
+
 ```JavaScript
 // build.js
 await Bun.build({
@@ -74,15 +110,17 @@ await Bun.build({
   minify: true,
 });
 ```
+
 2. Add a build script inside `package.json`:
+
 ```JSON
-...
+// above "dependencies"
 "scripts": {
   "build": "bun build.js"
 },
-...
 ```
-3. Run `bun run build`
+
+3. Build: `bun run build`
 
 ## Info
 
